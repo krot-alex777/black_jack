@@ -7,7 +7,7 @@ random.seed()
 
 class BlackJack:
     def __init__(self):
-        self.deck = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King', 'Ace'] * 4
+        self.deck = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Валет', 'Дама', 'Король', 'Туз'] * 4
         self.score = 0
         self.bot_score = 0
 
@@ -21,7 +21,7 @@ class BlackJack:
         current = self.deck.pop()
         if type(current) is int:
             score += current
-        elif current == 'Ace':
+        elif current == 'Туз':
             if score <= 10:
                 score += 11
             else:
@@ -35,8 +35,8 @@ class BlackJack:
         score = self.random_card(self.score, False)
         bot_score = self.random_card(self.bot_score, True)
         while True:
-            choice = input('Будете брать карту? y/n\n')
-            if choice == 'y':
+            choice = input('Будете брать карту? д/н\n')
+            if choice == 'д':
                 score = self.random_card(score, False)
                 if bot_score < 19 and score <= 21:
                     bot_score = self.random_card(bot_score, True)
@@ -48,7 +48,7 @@ class BlackJack:
                 elif score == 21 or bot_score > 21:
                     print('Поздравляю, вы победили!')
                     break
-            elif choice == 'n':
+            elif choice == 'н':
                 if score > bot_score and bot_score < 19:
                     while bot_score < 19:
                         bot_score = self.random_card(bot_score, True)
@@ -58,13 +58,8 @@ class BlackJack:
                     print(f'Вы победили, у вас {score} очков, у крупье {bot_score} очков')
 
                 break
-            
-        again = 'y'
-        while again.lower():
-            self.choice()
-            again = input('Играем еще раз? (y = да, n = нет):')
 
-    print('До новых встреч!')
+        print('До новых встреч!')
 
     def start(self):
         random.shuffle(self.deck)
